@@ -30,23 +30,31 @@
                     <!-- form start -->
                         {!! Form::open(['route' => ['product.store'],'method'=>'post','id'=>'add-product','files' => true]) !!}
                     
-                        <div class="card-body">                            
+                        <div class="card-body">  
+                            <div class="form-group">
+                                <label for="country">Image</label> 
+                                {{Form::file('image', ['class' => 'form-control','id'=>'image','required' => 'required','accept'=>"image/*"])}}
+                            </div>                          
                             <div class="form-group">
                                 <label for="oldpassword">Question</label>
                                 {{Form::text('question','', ['class' => 'form-control','id'=>'question','required' => 'required','placeholder'=>"Question"])}}
+                            </div>                            
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <label for="oldpassword">Option</label>
+                                    {{Form::text('options','', ['class' => 'form-control','id'=>'option','placeholder'=>"Option"])}}
+                                </div>    
+                                <div class="col-md-2 btn-hover">
+                                    <button type="button" class="btn btn-primary" id="add-option">Add Option</button>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="country">Image</label> 
-                                {{Form::file('image', ['class' => 'form-control','id'=>'image','required' => 'required'])}}
-                            </div>
-                            <div class="form-group">
-                                <label for="oldpassword">Option</label>
-                                {{Form::text('option','', ['class' => 'form-control','id'=>'option','required' => 'required','placeholder'=>"Option"])}}
-                                <button type="button" class="btn btn-primary" id="add-option">Add Option</button>
-                            </div>
-                            <div class="form-group" id="list-option">
 
+                            <div class="form-group" id="list-option">
                             </div>
+
+                            <div class="form-group" id="list-answer">
+                            </div>
+
                             <div class="form-group">
                                 <label for="start">Start Date</label>
                                 {{Form::text('start','', ['class' => 'form-control','id'=>'start','required' => 'required','placeholder'=>"Start Date"])}}

@@ -3,6 +3,10 @@ $(function () {
         $('#country-list').DataTable({
             processing: true,
             serverSide: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            responsive: true,
             "lengthMenu": [ [10, 25, 50, 100,500,-1], [10, 25, 50,100, 500,"All"] ],
             ajax: base_url + "/country/create",
             columns: [
@@ -21,6 +25,10 @@ $(function () {
         $('#sub-admin-list').DataTable({
             processing: true,
             serverSide: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            responsive: true,
             "lengthMenu": [ [10, 25, 50, 100,500,-1], [10, 25, 50,100, 500,"All"] ],
             ajax: base_url + "/sub-admin/create",
             columns: [
@@ -34,12 +42,14 @@ $(function () {
         });
     }
 
-    
-
     if ($('#product-list').length > 0) {
         $('#product-list').DataTable({
             processing: true,
-            serverSide: true,
+            serverSide: true,            
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            responsive: true,
             "lengthMenu": [ [10, 25, 50, 100,500,-1], [10, 25, 50,100, 500,"All"] ],
             ajax: base_url + "/product/create",
             columns: [
@@ -57,6 +67,10 @@ $(function () {
         $('#player-list').DataTable({
             processing: true,
             serverSide: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            responsive: true,
             "lengthMenu": [ [10, 25, 50, 100,500,-1], [10, 25, 50,100, 500,"All"] ],
             ajax: base_url + "/player/create",
             columns: [
@@ -73,6 +87,10 @@ $(function () {
         $('#winner-list').DataTable({
             processing: true,
             serverSide: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            responsive: true,
             "lengthMenu": [ [10, 25, 50, 100,500,-1], [10, 25, 50,100, 500,"All"] ],
             ajax: base_url + "/winner-list",
             columns: [
@@ -103,8 +121,113 @@ $(function(){
         },
         unhighlight: function (element, errorClass, validClass) {
           $(element).removeClass('is-invalid');
+        },
+        submitHandler: function (form) {
+            
+            if ($("input[name='option']").length > 0) {
+                let check = 0;
+                $("input[name='option']").each(function() {
+                    if($(this).prop("checked") == true){
+                        check = 1;
+                    }
+                });
+                if (check == 1) {     
+
+                     var formData = new FormData(this);
+                     $(this).submit(); 
+                    // $.ajax({
+                    //         url: base_url + "/product",
+                    //         type: 'POST',
+                    //         data:formData,
+                    //         dataType: "json",
+                    //         cache:false,
+                    //         contentType: false,
+                    //         processData: false,
+                    //         beforeSend: function () {
+                    //             $("#loading").show();
+                    //         },
+                    //         complete: function () {
+                    //             $("#loading").hide();
+                    //         },
+                    //         success: function (result) {
+                    //             if (result.status == "success") {                            
+                    //                 toastr.success(result.message, 'Success');                                    
+                    //                 //window.location.href = base_url+"/product"; 
+                    //             } else {
+                    //                 toastr.error(result.message, 'Error');
+                    //             }                    
+                    //         }
+                    //     });                     
+                } else {
+                    $("#loading").hide();
+                    toastr.error("Please select the Answer of Question", 'Error');
+                }
+                
+            } else {
+                $("#loading").hide();
+                toastr.error("Please add question option first", 'Error');
+            }
         }
     }); 
+
+    $("#update-product").validate({
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        },
+        submitHandler: function (form) {
+            
+            if ($("input[name='option']").length > 0) {
+                let check = 0;
+                $("input[name='option']").each(function() {
+                    if($(this).prop("checked") == true){
+                        check = 1;
+                    }
+                });
+                if (check == 1) {                    
+                    var formData = new FormData(this);
+                    $(this).submit();
+                    // $.ajax({
+                    //         url: base_url + "/product",
+                    //         type: 'POST',
+                    //         data:formData,
+                    //         dataType: "json",
+                    //         cache:false,
+                    //         contentType: false,
+                    //         processData: false,
+                    //         beforeSend: function () {
+                    //             $("#loading").show();
+                    //         },
+                    //         complete: function () {
+                    //             $("#loading").hide();
+                    //         },
+                    //         success: function (result) {
+                    //             if (result.status == "success") {                            
+                    //                 toastr.success(result.message, 'Success');                                    
+                    //                 //window.location.href = base_url+"/product"; 
+                    //             } else {
+                    //                 toastr.error(result.message, 'Error');
+                    //             }                    
+                    //         }
+                    //     });                     
+                } else {
+                    $("#loading").hide();
+                    toastr.error("Please select the Answer of Question", 'Error');
+                }
+                
+            } else {
+                $("#loading").hide();
+                toastr.error("Please add question option first", 'Error');
+            }
+        }
+    });
 
      
     if($("#change-password").length > 0){
@@ -253,23 +376,47 @@ $(function(){
         });
     }); 
 
-    var index = 0;
+    var index = $(".get-answer").length;
+
     $("body").on('click', '#add-option', function (event) {
         let option = $.trim($("#option").val());
-        //alert(option);
+        //index = $(".get-answer").length;
         if (!option) {
             toastr.error("Option field is required", 'Error');
             return false;
         }
 
-        var html = `<p><input type="radio" id="option`+index+`" name="option[]" value="`+option+`">
+        var html = `<p id="remove`+index+`"><input type="radio" id="option`+index+`" name="option" value="`+option+`" data-id="`+index+`" class="get-answer">
                     <label for="option`+index+`">`+option+`</label>
-                    <button type="button" class=""><i class="fa fa-times" aria-hidden="true"></i></button></p>`;
-        $("#list-option").append(html);       
+                    <button type="button" class="remove btn btn-danger" style="float:right" id="`+index+`">
+                    <i class="fa fa-times" aria-hidden="true"></i></button></p>`;
+        $("#list-option").append(html);  
 
-        index++;     
+        var html2 = `<p id="hide`+index+`">
+                        <input type="hidden" name="select[`+index+`][option]" value="`+option+`">
+                        <input type="hidden" name="select[`+index+`][answer]" value="0" class="option-answer">                    
+                    </p>`;
+
+        $("#list-answer").append(html2);            
+
+        index++;   
+
+        $("#option").val("");  
     });
     
+    $("body").on('click', '.remove', function (event) {
+        let index = $(this).attr("id");
+        $("#remove"+index).remove();
+        $("#hide"+index).remove();
+    });
+
+    $("body").on('click', '.get-answer', function (event) {
+        let index = $(this).attr("data-id");
+        $(".option-answer").val("0");
+        $("input[name='select["+index+"][answer]']").val("1");
+    });
+    
+
 });
 
 $(function () {

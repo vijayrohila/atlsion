@@ -17,7 +17,6 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string("question");            
             $table->string("image");            
-            $table->string("option");            
             $table->integer("answer");            
             $table->date("start_date")->nullable();            
             $table->date("end_date")->nullable();            

@@ -26,7 +26,7 @@
                 <div class="card">                    
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="sub-admin-list" class="table table-bordered table-striped">
+                        <table id="sub-admin-list" class="table table-bordered table-striped nowrap">
                             <thead>
                                 <tr>
                                     <th>S.no</th>                                    

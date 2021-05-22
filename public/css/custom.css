@@ -199,3 +199,21 @@ ul.nav.nav-treeview li.nav-item a.nav-link:active {
 .select2-selection {
     height: 38px!important;
 }
+
+button#add-option {
+    margin-top: 31px;
+}
+.content-wrapper .card-body .form-group .btn-hover button:hover {
+    background-color: #007bff!important;
+    padding: .375rem .75rem!important;
+    font-weight: 400!important;
+    font-size: 1rem!important;
+}
+
+.content-wrapper .card-body #list-option button:hover {
+    background-color: #dc3545!important;
+    padding: .375rem .75rem!important;
+    font-weight: 400!important;
+    font-size: 1rem;
+    line-height: 1.5;
+}

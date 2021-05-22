@@ -7,21 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-        'product_id','name','email','network','country','language','promotional_link','image','cost','post_type','company_name','mobile'
+        'start_date','end_date','image','question'
     ];
 
-    public function language()
+    public function option()
     {
-    	return $this->belongsTo(Language::class);
-    }
-
-    public function country()
-    {
-    	return $this->belongsTo(Country::class);
-    }
-
-    public function network()
-    {
-    	return $this->belongsTo(Network::class);
+        return $this->hasMany(Product_option::class);
     }
 }

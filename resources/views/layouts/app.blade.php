@@ -15,9 +15,14 @@
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- DataTables -->
-        <link rel="stylesheet" href="{{asset('public/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.7/css/rowReorder.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">       
+
+        <!-- <link rel="stylesheet" href="{{asset('public/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}"> -->
         <!-- Theme style -->
         <link rel="stylesheet" href="{{asset('public/dist/css/adminlte.min.css')}}">
+        
         <link rel="stylesheet" href="{{asset('public/css/custom.css')}}">
         <link rel="stylesheet" href="{{asset('public/css/toastr.css')}}">
         @yield('css')
@@ -68,7 +73,7 @@
             @extends("layouts.footer")
             <!-- REQUIRED SCRIPTS -->
             <!-- jQuery -->
-            <script src="{{ asset('public/plugins/jquery/jquery.min.js')}}"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
             <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
             <!-- Bootstrap -->
@@ -91,13 +96,18 @@
             <script src="{{ asset('public/plugins/chart.js/Chart.min.js')}}"></script>
 
             <script src="{{ asset('public/plugins/datatables/jquery.dataTables.js')}}"></script>
-            <script src="{{ asset('public/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+            <script src="https://cdn.datatables.net/rowreorder/1.2.7/js/dataTables.rowReorder.min.js"></script>
+            <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script> 
+            <!-- <script src="{{ asset('public/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script> -->
+              
 
             <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
             <!-- PAGE SCRIPTS -->
 <!--            <script src="{{ asset('public/dist/js/pages/dashboard2.js')}}"></script>-->
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
             <script src="{{asset('public/js/ckeditor.js')}}"></script>
             <script src="{{asset('public/js/custom.js')}}"></script>
             <script src="{{asset('public/js/toastr.js')}}"></script>

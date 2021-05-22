@@ -6,6 +6,7 @@ use App\Product;
 use App\Network;
 use App\Country;
 use App\Language;
+use App\Product_option;
 use Illuminate\Http\Request;
 use yajra\Datatables\Datatables;
 use Validator;
@@ -66,7 +67,67 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [                   
+                        'question' => ['required', 'string'],         
+                        'start' => ['required'] ,       
+                        'end' => ['required'],        
+                        'image' => ['required']        
+                    ]);
+
+        if ($validator->fails()) {
+            $errors = json_decode($validator->errors());
+            foreach ($errors as $key => $value) {
+                return redirect()->back()->with(['status' => 'error', 'error_message' => $value[0]])
+                        ->withInput($request->all());        
+            }
+        }
+
+        $input = $request->all();
+
+        $question = [];
+
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $destinationPath = 'public/product';
+            $file_name = time().$file->getClientOriginalName();
+            $file->move($destinationPath, $file_name);
+            $question['image'] = $file_name;
+        } 
+
+        $question['question'] = $input['question'];
+        $question['start_date'] = $input['start'];
+        $question['end_date'] = $input['end'];   
+        $question['created_at'] = date("Y-m-d h:i:s");   
+        $question['updated_at'] = date("Y-m-d h:i:s"); 
+
+        $question_id = Product::create($question);
+
+        //print_r($question_id); die();
+
+        $option = [];
+
+        foreach ($input['select'] as $key => $slt) {
+            $option[] = array(
+                            "product_id" => $question_id->id,
+                            "option" => $slt['option'],
+                            "answer" => $slt['answer'],
+                            'created_at' => date("Y-m-d h:i:s"),
+                            'updated_at' => date("Y-m-d h:i:s"),
+                        );
+        }
+
+        //echo "<pre>"; print_r($option); die();
+        
+        Product_option::insert($option);
+
+        $ans = Product_option::where(["product_id" => $question_id->id,"answer"=>"1"])->get()->first();
+
+        $question_id->answer = $ans->id;
+
+        $question_id->save();
+
+        return redirect('product')
+        ->with(['status' => 'success', 'message' => "Question Added Successfully!!"]);
     }
 
     /**
@@ -88,10 +149,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $network = Network::all();
-        $language = Language::all();
-        $country = Country::all();
-        return view("product.edit_product",compact('product','network','language','country'));
+         
+        return view("product.edit_product",compact('product'));
     }
 
     /**
@@ -104,18 +163,9 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
        $validator = Validator::make($request->all(), [                   
-                        'name' => 'required|max:200',                                                        
-                        'email' => 'required|max:200',                                                        
-                        'image' => 'nullable|mimes:jpeg,jpg,png,gif',
-                        'cost'=> 'required',
-                        'mobile'=> 'required',
-                        'product_id'=> 'required',                        
-                        'network_id'=> 'required',                        
-                        'country_id'=> 'required',                        
-                        'language_id'=> 'required',                        
-                        'promotional_link'=> 'required',                        
-                        'post_type'=> 'required',                        
-                        'captcha'=> 'required|max:200',                        
+                        'question' => ['required', 'string'],         
+                        'start' => ['required'] ,       
+                        'end' => ['required'],                       
                     ]);
         
 
@@ -137,23 +187,35 @@ class ProductController extends Controller
             $product->image = $file_name;
         }  
 
-        $product->name = $input['name'];
-        $product->cost = $input['cost'];
-        $product->email = $input['email'];        
-        $product->mobile = $input['mobile'];        
-        $product->product_id = $input['product_id'];   
-        $product->network_id = $input['network_id'];   
-        $product->country_id = $input['country_id'];   
-        $product->language_id = $input['language_id'];   
-        $product->promotional_link = $input['promotional_link'];   
-        $product->post_type = $input['post_type'];   
-        $product->company_name = $input['captcha'];   
-        //echo "<pre>"; print_r($product); die();
+        $product->question = $input['question'];
+        $product->start_date = $input['start'];
+        $product->end_date = $input['end'];      
+        //$product->save();
+
+
+        $option = [];
+
+        foreach ($input['select'] as $key => $slt) {
+            $option[] = array(
+                            "product_id" => $product->id,
+                            "option" => $slt['option'],
+                            "answer" => $slt['answer'],
+                            'created_at' => date("Y-m-d h:i:s"),
+                            'updated_at' => date("Y-m-d h:i:s"),
+                        );
+        }
+
+        Product_option::where(["product_id" => $product->id])->delete();
+        Product_option::insert($option);
+
+        $ans = Product_option::where(["product_id" => $product->id,"answer"=>"1"])->get()->first();
+
+        $product->answer = $ans->id;
 
         $product->save();
 
         return redirect("product")
-               ->with(['status' => 'success', 'message' => "Product updated successfully!"]);
+               ->with(['status' => 'success', 'message' => "Question updated successfully!"]);
     }
 
     /**
