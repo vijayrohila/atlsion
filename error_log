@@ -1,0 +1,29 @@
+[17-May-2021 09:13:23 UTC] PHP Warning:  require(/home1/vijay5sn/public_html/atlasion/vendor/autoload.php): failed to open stream: No such file or directory in /home1/vijay5sn/public_html/atlasion/index.php on line 24
+[17-May-2021 09:13:23 UTC] PHP Warning:  require(/home1/vijay5sn/public_html/atlasion/vendor/autoload.php): failed to open stream: No such file or directory in /home1/vijay5sn/public_html/atlasion/index.php on line 24
+[17-May-2021 09:13:23 UTC] PHP Fatal error:  require(): Failed opening required '/home1/vijay5sn/public_html/atlasion/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home1/vijay5sn/public_html/atlasion/index.php on line 24
+[17-May-2021 09:13:27 UTC] PHP Warning:  require(/home1/vijay5sn/public_html/atlasion/vendor/autoload.php): failed to open stream: No such file or directory in /home1/vijay5sn/public_html/atlasion/index.php on line 24
+[17-May-2021 09:13:27 UTC] PHP Warning:  require(/home1/vijay5sn/public_html/atlasion/vendor/autoload.php): failed to open stream: No such file or directory in /home1/vijay5sn/public_html/atlasion/index.php on line 24
+[17-May-2021 09:13:27 UTC] PHP Fatal error:  require(): Failed opening required '/home1/vijay5sn/public_html/atlasion/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home1/vijay5sn/public_html/atlasion/index.php on line 24
+[17-May-2021 09:14:05 UTC] PHP Warning:  require(/home1/vijay5sn/public_html/atlasion/vendor/autoload.php): failed to open stream: No such file or directory in /home1/vijay5sn/public_html/atlasion/artisan on line 18
+[17-May-2021 09:14:05 UTC] PHP Warning:  require(/home1/vijay5sn/public_html/atlasion/vendor/autoload.php): failed to open stream: No such file or directory in /home1/vijay5sn/public_html/atlasion/artisan on line 18
+[17-May-2021 09:14:05 UTC] PHP Fatal error:  require(): Failed opening required '/home1/vijay5sn/public_html/atlasion/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home1/vijay5sn/public_html/atlasion/artisan on line 18
+[17-May-2021 09:15:09 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home1/vijay5sn/public_html/atlasion/bootstrap/app.php:14
+Stack trace:
+#0 /home1/vijay5sn/public_html/atlasion/artisan(20): require_once()
+#1 {main}
+  thrown in /home1/vijay5sn/public_html/atlasion/bootstrap/app.php on line 14
+[17-May-2021 09:15:50 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home1/vijay5sn/public_html/atlasion/bootstrap/app.php:14
+Stack trace:
+#0 /home1/vijay5sn/public_html/atlasion/artisan(20): require_once()
+#1 {main}
+  thrown in /home1/vijay5sn/public_html/atlasion/bootstrap/app.php on line 14
+[17-May-2021 09:33:44 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home1/vijay5sn/public_html/atlasion/bootstrap/app.php:14
+Stack trace:
+#0 /home1/vijay5sn/public_html/atlasion/index.php(38): require_once()
+#1 {main}
+  thrown in /home1/vijay5sn/public_html/atlasion/bootstrap/app.php on line 14
+[17-May-2021 09:38:35 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home1/vijay5sn/public_html/atlasion/bootstrap/app.php:14
+Stack trace:
+#0 /home1/vijay5sn/public_html/atlasion/index.php(38): require_once()
+#1 {main}
+  thrown in /home1/vijay5sn/public_html/atlasion/bootstrap/app.php on line 14
