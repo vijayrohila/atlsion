@@ -50,23 +50,7 @@
                 </li>
                 @endcan                
 
-                <li class="nav-item has-treeview @if(\Request::route()->getName() == 'player.index' ) {{'menu-open'}} @endif" >
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-donate"></i>
-                        <p>
-                          Data Management
-                            <i class="fas fa-angle-left right"></i>                            
-                        </p>
-                    </a>                    
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('player.index') }}" class="nav-link @if(\Request::route()->getName() == 'player.index') {{'active'}} @endif">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Data Management</p>
-                            </a>
-                        </li>                        
-                    </ul>                    
-                </li> 
+
 
                 @can('isAdmin')
                 <li class="nav-item has-treeview @if(\Request::route()->getName() == 'product.index' || \Request::route()->getName() == 'product.store') {{'menu-open'}} @endif" >
@@ -92,6 +76,31 @@
                         </li>                        
                     </ul>                                        
                 </li>    
+
+                 <li class="nav-item has-treeview @if(\Request::route()->getName() == 'player.index' ) {{'menu-open'}} @endif" >
+                    <a href="#" class="nav-link">
+                        <!-- <i class="nav-icon fas fa-donate"></i> -->
+                        <i class="nav-icon fas fa-store"></i>
+                        <p>
+                          Store Management
+                            <i class="fas fa-angle-left right"></i>                            
+                        </p>
+                    </a>                    
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('player.index') }}" class="nav-link @if(\Request::route()->getName() == 'player.index') {{'active'}} @endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Store Data</p>
+                            </a>
+                        </li> 
+                        <li class="nav-item">
+                            <a href="{{ route('player.index') }}" class="nav-link @if(\Request::route()->getName() == 'player.index') {{'active'}} @endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Upload Products</p>
+                            </a>
+                        </li>                        
+                    </ul>                    
+                </li> 
 
                 <li class="nav-item has-treeview @if(\Request::route()->getName() == 'winner' ) {{'menu-open'}} @endif" >
                     <a href="#" class="nav-link">

@@ -215,7 +215,7 @@ class ProductController extends Controller
         $product->save();
 
         return redirect("product")
-               ->with(['status' => 'success', 'message' => "Question updated successfully!"]);
+               ->with(['status' => 'success', 'message' => "Question Updated Successfully!"]);
     }
 
     /**
