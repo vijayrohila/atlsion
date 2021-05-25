@@ -28,98 +28,65 @@
                         <h3 class="card-title">Edit Post</h3>
                     </div>                    
                     <!-- form start -->
-                {!! Form::open(['route' => ['product.update', $product->id],'method'=>'post','id'=>'add-product','files' => true]) !!}
+                {!! Form::open(['route' => ['product.update', $product->id],'method'=>'post','id'=>'update-product','files' => true]) !!}
                     {{ method_field('PATCH') }}
-                        <div class="card-body">
+                        <div class="card-body">  
                             <div class="form-group">
-                                <label for="oldpassword">Post ID</label>
-                                {{Form::text('product_id',$product->product_id, ['class' => 'form-control','id'=>'product_id','required' => 'required','placeholder'=>"Post ID","readonly"])}}
-                            </div>                           
-                                                        
-                            <div class="form-group">
-                                <label for="oldpassword">Name</label>
-                                {{Form::text('name',$product->name, ['class' => 'form-control','id'=>'name','required' => 'required','placeholder'=>"Product name"])}}
-                            </div>
-
-                            <div class="form-group">
-                                <label for="oldpassword">Email</label>
-                                {{Form::email('email',$product->email, ['class' => 'form-control','id'=>'email','required' => 'required','placeholder'=>"Email"])}}
-                            </div>  
-
-                            <div class="form-group">
-                                <label for="oldpassword">Country</label>
-                                <select name="country_id" required="" id="country_id" class="form-control">
-                                    <option value="">Select Country</option>
-                                    @foreach($country as $key => $corty)
-                                        <option value="{{$corty->id}}" @if($product->country_id == $corty->id) {{"selected"}} @endif>{{$corty->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="oldpassword">Mobile Number</label>
-                                {{Form::number('mobile',$product->mobile, ['class' => 'form-control','id'=>'mobile','placeholder'=>"Mobile Number"])}}
-                            </div>                            
-
-                            <div class="form-group">
-                                <label for="oldpassword">Language</label>
-                                <select name="language_id" required="" id="language_id" class="form-control">
-                                    <option value="">Select Language</option>
-                                    @foreach($language as $key => $lang)
-                                        <option value="{{$lang->id}}" @if($product->language_id == $lang->id) {{"selected"}} @endif>{{$lang->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>                        
-                            
-                            <div class="form-group">
-                                <label for="oldpassword">Networks / Website</label>
-                                <select name="network_id" required="" id="network_id" class="form-control">
-                                    <option value="">Select Netowrk/Site</option>
-                                    @foreach($network as $key => $net)
-                                        <option value="{{$net->id}}" @if($product->network_id == $net->id) {{"selected"}} @endif>{{$net->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <!-- <div class="form-group">
                                 <label for="country">Image</label> 
-                                {{Form::file('image', ['class' => 'form-control','id'=>'image'])}}
+                                {{Form::file('image', ['class' => 'form-control','id'=>'image','accept'=>"image/*"])}}
+                            </div>  
+                            <div class="form-group">
+                                <img src="{{url('/').'/public/product/'.$product->image}}" style="width: 100%;">
+                            </div>                        
+                            <div class="form-group">
+                                <label for="oldpassword">Question</label>
+                                {{Form::text('question',$product->question, ['class' => 'form-control','id'=>'question','required' => 'required','placeholder'=>"Question"])}}
+                            </div>                            
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <label for="oldpassword">Option</label>
+                                    {{Form::text('options','', ['class' => 'form-control','id'=>'option','placeholder'=>"Option"])}}
+                                </div>    
+                                <div class="col-md-2 btn-hover">
+                                    <button type="button" class="btn btn-primary" id="add-option">Add Option</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="list-option">
+                                @foreach($product->option as $key=>$option)
+                                <p id="remove{{$key}}">
+                                    <input type="radio" id="option{{$key}}" name="option" value="{{$option->option}}" data-id="{{$key}}" class="get-answer" @if($option->answer == 1) {{"checked"}} @endif>
+                                    <label for="option{{$key}}">{{$option->option}}</label>
+                                    <button type="button" class="remove btn btn-danger" style="float:right" id="{{$key}}">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </button>
+                                </p>
+                                @endforeach
+                            </div>
+
+                            <div class="form-group" id="list-answer">
+                                @foreach($product->option as $key=>$option)
+                                    <p id="hide{{$key}}">
+                                        <input type="hidden" name="select[{{$key}}][option]" value="{{$option->option}}">
+                                        <input type="hidden" name="select[{{$key}}][answer]" value="{{$option->answer}}" class="option-answer">                    
+                                    </p>
+                                @endforeach
                             </div>
 
                             <div class="form-group">
-                            <img src="{{url('/public/product/'.$product->image)}}" width="100px"> 
-                            </div> -->                          
-                            
-
-                            <div class="form-group">
-                                <label for="oldpassword">Promotional Link</label>
-                                {{Form::text('promotional_link',$product->promotional_link, ['class' => 'form-control','id'=>'promotional_link','required' => 'required','placeholder'=>"Promotional Link"])}}
+                                <label for="start">Start Date</label>
+                                {{Form::text('start',$product->start_date, ['class' => 'form-control','id'=>'start','required' => 'required','placeholder'=>"Start Date"])}}
                             </div>
-
                             <div class="form-group">
-                                <label for="oldpassword">Post/Content Display</label>
-                                <select name="post_type" required="" id="network" class="form-control">
-                                    <option value="">Select Post/Content</option>    
-                                    <option value="1" @if($product->post_type == "1") {{"selected"}} @endif>Above 18</option>
-                                    <option value="0" @if($product->post_type == "0") {{"selected"}} @endif>All</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="oldpassword">Captcha Entered</label>
-                                {{Form::text('captcha',$product->company_name, ['class' => 'form-control','id'=>'captcha','placeholder'=>"Captcha"])}}
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password_confirmation">Paid Amount</label>
-                                {{Form::number('cost',$product->cost, ['class' => 'form-control','id'=>'cost','required' => 'required','placeholder'=>"Paid Amount"])}}
-                            </div>
-
+                                <label for="end">End Date</label>
+                                {{Form::text('end',$product->end_date, ['class' => 'form-control','id'=>'end','required' => 'required','placeholder'=>"End Date"])}}
+                            </div>    
+                                                                         
                              <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">UPDATE</button>
+                                <button type="submit" class="btn btn-primary">ADD</button>
                             </div>                        
-                        </div>
+                        </div> 
                     {!! Form::close() !!}
                 </div>                          
             </div>

@@ -41,16 +41,14 @@
                                 {{Form::number('drow_price',empty($settings)?'':$settings['drow_price'], ['class' => 'form-control','id'=>'drow_price','required' => 'required','placeholder'=>"Prize Money Per 1 Draw"])}}
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="country">Banner 1</label> 
                                 {{Form::file('image1', ['class' => 'form-control','id'=>'image1'])}}
-
                                 @php
                                     $banner1 = !empty($settings)?$settings['banner1']:"";
                                     $banner2 = !empty($settings)?$settings['banner2']:"";
                                     $banner3 = !empty($settings)?$settings['banner3']:"";
                                 @endphp
-
                                 <p><img src="{{url('/public/banner/'.$banner1)}}" style="width: 100px;"></p>
                             </div>
 
@@ -64,7 +62,7 @@
                                 <label for="country">Banner 3</label> 
                                 {{Form::file('image3', ['class' => 'form-control','id'=>'image3'])}}
                                 <p><img src="{{url('/public/banner/'.$banner3)}}" style="width: 100px;"></p>
-                            </div>
+                            </div> -->
 
                             <div class="form-group">
                                 <label for="about_us">About Us</label>
