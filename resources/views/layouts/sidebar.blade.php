@@ -1,8 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link">
-        
+    <a href="" class="brand-link">        
         <span class="brand-text font-weight-light " style="margin: 17%;">{{ config('app.name', 'Laravel') }}</span>
     </a>
 
@@ -10,8 +9,7 @@
     <div class="sidebar">
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">                
                 <li class="nav-item has-treeview @if(\Request::route()->getName() == 'change-password') {{'menu-open'}} @endif" >
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-key"></i>
@@ -49,9 +47,6 @@
                     </ul>                    
                 </li>
                 @endcan                
-
-
-
                 @can('isAdmin')
                 <li class="nav-item has-treeview @if(\Request::route()->getName() == 'product.index' || \Request::route()->getName() == 'product.store') {{'menu-open'}} @endif" >
                     <a href="#" class="nav-link">
@@ -77,7 +72,7 @@
                     </ul>                                        
                 </li>    
 
-                 <li class="nav-item has-treeview @if(\Request::route()->getName() == 'player.index' ) {{'menu-open'}} @endif" >
+                 <li class="nav-item has-treeview @if(\Request::route()->getName() == 'post.index' || \Request::route()->getName() == 'post.add' ) {{'menu-open'}} @endif" >
                     <a href="#" class="nav-link">
                         <!-- <i class="nav-icon fas fa-donate"></i> -->
                         <i class="nav-icon fas fa-store"></i>
@@ -88,13 +83,13 @@
                     </a>                    
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('player.index') }}" class="nav-link @if(\Request::route()->getName() == 'player.index') {{'active'}} @endif">
+                            <a href="{{ route('post.index') }}" class="nav-link @if(\Request::route()->getName() == 'post.index') {{'active'}} @endif">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Store Data</p>
                             </a>
                         </li> 
                         <li class="nav-item">
-                            <a href="{{ route('player.index') }}" class="nav-link @if(\Request::route()->getName() == 'player.index') {{'active'}} @endif">
+                            <a href="{{ route('post.add') }}" class="nav-link @if(\Request::route()->getName() == 'post.add') {{'active'}} @endif">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Upload Products</p>
                             </a>

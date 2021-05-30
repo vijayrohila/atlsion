@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController');
 	Route::resource('product', 'ProductController');	
 	Route::resource('player', 'PlayerController');	
+	Route::resource('post', 'PostController');	
+	Route::get('add-post', 'PostController@addVIew')->name('post.add');	
 	Route::get('winner', 'PlayerController@winner')->name('winner');	
 	Route::get('winner-list', 'PlayerController@winnerList')->name('winner-list');
 

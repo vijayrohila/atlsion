@@ -63,6 +63,25 @@ $(function () {
         });
     }
 
+    if ($('#post-list').length > 0) {
+        $('#post-list').DataTable({
+            processing: true,
+            serverSide: true,            
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            responsive: true,
+            "lengthMenu": [ [10, 25, 50, 100,500,-1], [10, 25, 50,100, 500,"All"] ],
+            ajax: base_url + "/post/create",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},                
+                {data: 'image', name: 'image', orderable: false, searchable: false},
+                {data: 'url', name: 'url'},               
+                {data: 'action', name: 'action', orderable: false, searchable: false}               
+            ]
+        });
+    }
+
     if ($('#player-list').length > 0) {
         $('#player-list').DataTable({
             processing: true,
@@ -167,6 +186,20 @@ $(function(){
                 $("#loading").hide();
                 toastr.error("Please add question option first", 'Error');
             }
+        }
+    }); 
+
+    $("#add-post").validate({
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
         }
     }); 
 
